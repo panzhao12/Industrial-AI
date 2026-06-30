@@ -1,0 +1,92 @@
+[
+  {
+    "case_id": "EVAL-001",
+    "incident_input": "Excavator boom lift is weak, main pressure is below target, and pump flow falls under load.",
+    "expected_error_codes": ["HYD-101", "PMP-420"],
+    "expected_retrieved_documents": ["MAN-EXC-420H"],
+    "expected_root_causes": ["Main pump efficiency loss", "Worn rotating group"],
+    "expected_safety_notes": ["Lower suspended loads before pressure testing."],
+    "should_require_human_confirmation": true
+  },
+  {
+    "case_id": "EVAL-002",
+    "incident_input": "Mobile crane accumulator pressure decays after load-hold test and boom response is delayed.",
+    "expected_error_codes": ["ACC-505", "CYL-208"],
+    "expected_retrieved_documents": ["MAN-CRN-900H"],
+    "expected_root_causes": ["Accumulator bladder leak", "Low nitrogen precharge"],
+    "expected_safety_notes": ["Depressurize and follow accumulator lockout procedure."],
+    "should_require_human_confirmation": true
+  },
+  {
+    "case_id": "EVAL-003",
+    "incident_input": "Concrete pump delivery pressure fluctuates and cycle rate drops during high slump pour.",
+    "expected_error_codes": ["PMP-420", "HYD-204"],
+    "expected_retrieved_documents": ["MAN-PMP-72H"],
+    "expected_root_causes": ["Wear plate wear", "Cutting ring wear"],
+    "expected_safety_notes": ["Do not continue production at elevated temperature."],
+    "should_require_human_confirmation": true
+  },
+  {
+    "case_id": "EVAL-004",
+    "incident_input": "Hydraulic press ram drifts during hold segment with no visible external leak.",
+    "expected_error_codes": ["CYL-208", "HYD-101"],
+    "expected_retrieved_documents": ["MAN-PRS-HXP900"],
+    "expected_root_causes": ["Load-hold valve internal leakage"],
+    "expected_safety_notes": ["Support loads mechanically before isolation tests."],
+    "should_require_human_confirmation": true
+  },
+  {
+    "case_id": "EVAL-005",
+    "incident_input": "Test rig supply pressure sensor disagrees with a calibrated reference gauge during calibration.",
+    "expected_error_codes": ["SNS-502"],
+    "expected_retrieved_documents": ["MAN-RIG-250"],
+    "expected_root_causes": ["Pressure sensor calibration drift"],
+    "expected_safety_notes": ["Use mechanical gauges for safety-critical confirmation."],
+    "should_require_human_confirmation": false
+  },
+  {
+    "case_id": "EVAL-006",
+    "incident_input": "Oil temperature exceeds limit and cooler delta temperature is low on excavator during trenching.",
+    "expected_error_codes": ["HYD-310", "TMP-302"],
+    "expected_retrieved_documents": ["MAN-EXC-420H"],
+    "expected_root_causes": ["Cooler fins blocked", "Reduced cooler airflow"],
+    "expected_safety_notes": ["Allow oil to cool before opening hydraulic lines."],
+    "should_require_human_confirmation": true
+  },
+  {
+    "case_id": "EVAL-007",
+    "incident_input": "Crane control voltage drops during winch actuation and the controller resets intermittently.",
+    "expected_error_codes": ["ELE-330", "SNS-502"],
+    "expected_retrieved_documents": ["MAN-CRN-900H"],
+    "expected_root_causes": ["Loose chassis ground strap"],
+    "expected_safety_notes": ["Unexpected valve dropout may cause load movement."],
+    "should_require_human_confirmation": true
+  },
+  {
+    "case_id": "EVAL-008",
+    "incident_input": "Press cannot reach forming pressure and relief line heats quickly.",
+    "expected_error_codes": ["REL-440", "HYD-101"],
+    "expected_retrieved_documents": ["MAN-PRS-HXP900"],
+    "expected_root_causes": ["Relief valve setpoint drift", "Relief valve contamination"],
+    "expected_safety_notes": ["Use calibrated test equipment and pressure-rated hoses."],
+    "should_require_human_confirmation": true
+  },
+  {
+    "case_id": "EVAL-009",
+    "incident_input": "Test rig pump whines, flow becomes unstable, and inlet vacuum is elevated.",
+    "expected_error_codes": ["CAV-260", "VIB-220"],
+    "expected_retrieved_documents": ["MAN-RIG-250"],
+    "expected_root_causes": ["Partially blocked suction strainer"],
+    "expected_safety_notes": ["Stop test if pump noise escalates rapidly."],
+    "should_require_human_confirmation": true
+  },
+  {
+    "case_id": "EVAL-010",
+    "incident_input": "Return filter indicator activates after hammer attachment use and oil sample shows high particle count.",
+    "expected_error_codes": ["FIL-115", "OIL-160"],
+    "expected_retrieved_documents": ["MAN-EXC-420H"],
+    "expected_root_causes": ["Contaminated attachment quick-couplers introduced debris"],
+    "expected_safety_notes": ["Contain spilled oil during filter change."],
+    "should_require_human_confirmation": false
+  }
+]

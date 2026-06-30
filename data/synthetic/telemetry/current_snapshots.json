@@ -1,0 +1,77 @@
+[
+  {
+    "scenario_id": "TEL-EXC-001-current",
+    "machine_id": "HYD-EXC-001",
+    "scenario_label": "Warm hydraulic circuit with pressure drift",
+    "summary": "Main pressure is below nominal during boom lift while oil temperature is rising after an extended dig cycle.",
+    "captured_at": "2026-06-29T09:05:00Z",
+    "is_current": true,
+    "readings": [
+      { "name": "Main pressure", "value": 248.0, "unit": "bar", "status": "warning", "trend": "down" },
+      { "name": "Pilot pressure", "value": 31.4, "unit": "bar", "status": "normal", "trend": "flat" },
+      { "name": "Pump flow", "value": 286.0, "unit": "L/min", "status": "warning", "trend": "down" },
+      { "name": "Oil temperature", "value": 82.6, "unit": "C", "status": "warning", "trend": "up" },
+      { "name": "Vibration RMS", "value": 4.8, "unit": "mm/s", "status": "warning", "trend": "up" }
+    ]
+  },
+  {
+    "scenario_id": "TEL-CRN-002-current",
+    "machine_id": "HYD-CRN-002",
+    "scenario_label": "Accumulator precharge instability",
+    "summary": "Accumulator pressure decays after load-hold testing and voltage dips during winch actuation.",
+    "captured_at": "2026-06-29T09:07:00Z",
+    "is_current": true,
+    "readings": [
+      { "name": "Boom pressure", "value": 312.0, "unit": "bar", "status": "warning", "trend": "oscillating" },
+      { "name": "Accumulator pressure", "value": 84.0, "unit": "bar", "status": "critical", "trend": "down" },
+      { "name": "Winch flow", "value": 141.0, "unit": "L/min", "status": "normal", "trend": "flat" },
+      { "name": "Oil temperature", "value": 76.8, "unit": "C", "status": "warning", "trend": "up" },
+      { "name": "Control voltage", "value": 21.7, "unit": "V", "status": "critical", "trend": "down" }
+    ]
+  },
+  {
+    "scenario_id": "TEL-PMP-003-current",
+    "machine_id": "HYD-PMP-003",
+    "scenario_label": "Pump output degradation during high slump pour",
+    "summary": "Delivery pressure and flow fluctuate under load, with cycle rate slipping below expected throughput.",
+    "captured_at": "2026-06-29T09:08:00Z",
+    "is_current": true,
+    "readings": [
+      { "name": "Delivery pressure", "value": 167.0, "unit": "bar", "status": "warning", "trend": "oscillating" },
+      { "name": "Pump flow", "value": 198.0, "unit": "L/min", "status": "warning", "trend": "down" },
+      { "name": "Oil temperature", "value": 79.3, "unit": "C", "status": "warning", "trend": "up" },
+      { "name": "Motor current", "value": 138.0, "unit": "A", "status": "normal", "trend": "flat" },
+      { "name": "Cycle rate", "value": 21.2, "unit": "cycles/min", "status": "warning", "trend": "down" }
+    ]
+  },
+  {
+    "scenario_id": "TEL-PRS-004-current",
+    "machine_id": "HYD-PRS-004",
+    "scenario_label": "Nominal forming cycle",
+    "summary": "Press pressure, ram position, oil temperature, and vibration are within expected operating bands.",
+    "captured_at": "2026-06-29T09:10:00Z",
+    "is_current": true,
+    "readings": [
+      { "name": "Press pressure", "value": 274.0, "unit": "bar", "status": "normal", "trend": "flat" },
+      { "name": "Ram position", "value": 0.8, "unit": "mm offset", "status": "normal", "trend": "flat" },
+      { "name": "Oil temperature", "value": 61.2, "unit": "C", "status": "normal", "trend": "flat" },
+      { "name": "Cycle time", "value": 6.2, "unit": "s", "status": "normal", "trend": "flat" },
+      { "name": "Vibration RMS", "value": 2.1, "unit": "mm/s", "status": "normal", "trend": "flat" }
+    ]
+  },
+  {
+    "scenario_id": "TEL-RIG-005-current",
+    "machine_id": "HYD-RIG-005",
+    "scenario_label": "Offline sensor mismatch investigation",
+    "summary": "Test rig remains offline after supply pressure and return pressure sensors disagreed during calibration.",
+    "captured_at": "2026-06-29T09:12:00Z",
+    "is_current": true,
+    "readings": [
+      { "name": "Supply pressure", "value": 0.0, "unit": "bar", "status": "normal", "trend": "flat" },
+      { "name": "Return pressure", "value": 0.0, "unit": "bar", "status": "normal", "trend": "flat" },
+      { "name": "Flow rate", "value": 0.0, "unit": "L/min", "status": "normal", "trend": "flat" },
+      { "name": "Oil temperature", "value": 28.4, "unit": "C", "status": "normal", "trend": "flat" },
+      { "name": "Control voltage", "value": 24.1, "unit": "V", "status": "normal", "trend": "flat" }
+    ]
+  }
+]

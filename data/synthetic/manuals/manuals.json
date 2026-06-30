@@ -1,0 +1,52 @@
+[
+  {
+    "id": "MAN-EXC-420H",
+    "name": "TerraLift EX-420H Hydraulic Service Manual",
+    "kind": "manual",
+    "machine_id": "HYD-EXC-001",
+    "uploaded_at": "2026-06-01T08:00:00Z",
+    "status": "synthetic_metadata_only",
+    "source_uri": "manuals/terralift-ex-420h.md",
+    "sections": ["3.2 Main pump pressure test", "4.1 Boom cylinder drift", "6.4 Oil cooler cleaning", "8.3 Return filter service"]
+  },
+  {
+    "id": "MAN-CRN-900H",
+    "name": "Cranex MC-900H Hydraulic Load System Manual",
+    "kind": "manual",
+    "machine_id": "HYD-CRN-002",
+    "uploaded_at": "2026-06-02T08:00:00Z",
+    "status": "synthetic_metadata_only",
+    "source_uri": "manuals/cranex-mc-900h.md",
+    "sections": ["2.5 Accumulator precharge", "5.2 Outrigger load-hold valves", "7.1 Winch flow verification", "9.4 Electrical supply checks"]
+  },
+  {
+    "id": "MAN-PMP-72H",
+    "name": "PutzTech CP-72H Concrete Pump Maintenance Guide",
+    "kind": "manual",
+    "machine_id": "HYD-PMP-003",
+    "uploaded_at": "2026-06-03T08:00:00Z",
+    "status": "synthetic_metadata_only",
+    "source_uri": "manuals/putztech-cp-72h.md",
+    "sections": ["3.1 Pump output test", "4.6 S-tube actuation", "6.2 Cooler cleaning", "8.5 Wear plate inspection"]
+  },
+  {
+    "id": "MAN-PRS-HXP900",
+    "name": "Apex HXP-900 Press Hydraulic Reference",
+    "kind": "manual",
+    "machine_id": "HYD-PRS-004",
+    "uploaded_at": "2026-06-04T08:00:00Z",
+    "status": "synthetic_metadata_only",
+    "source_uri": "manuals/apex-hxp-900.md",
+    "sections": ["2.2 Ram alignment", "3.7 Pressure transducer calibration", "5.5 Relief valve setpoint", "7.3 Manifold inspection"]
+  },
+  {
+    "id": "MAN-RIG-250",
+    "name": "HydroLab TR-250 Test Rig Calibration Manual",
+    "kind": "manual",
+    "machine_id": "HYD-RIG-005",
+    "uploaded_at": "2026-06-05T08:00:00Z",
+    "status": "synthetic_metadata_only",
+    "source_uri": "manuals/hydrolab-tr-250.md",
+    "sections": ["1.4 Safety interlock test", "3.3 Pressure sensor calibration", "4.2 Flow meter verification", "6.1 Harness inspection"]
+  }
+]

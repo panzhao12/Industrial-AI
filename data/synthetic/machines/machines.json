@@ -1,0 +1,102 @@
+[
+  {
+    "id": "HYD-EXC-001",
+    "name": "Hydraulic Excavator 001",
+    "asset_tag": "HYD-EXC-001",
+    "equipment_type": "hydraulic excavator",
+    "line": "Earthmoving Fleet",
+    "location": "North Quarry / Bench 3",
+    "status": "warning",
+    "criticality": "high",
+    "manufacturer": "TerraLift",
+    "model": "EX-420H",
+    "installed_at": "2021-03-18T08:00:00Z",
+    "last_service_at": "2026-06-10T13:20:00Z",
+    "next_maintenance": {
+      "starts_at": "2026-07-05T06:00:00Z",
+      "ends_at": "2026-07-05T14:00:00Z",
+      "description": "Hydraulic oil sample, boom cylinder seal inspection, and return filter replacement."
+    },
+    "monitored_signals": ["main_pressure", "pilot_pressure", "oil_temperature", "pump_flow", "vibration"]
+  },
+  {
+    "id": "HYD-CRN-002",
+    "name": "Mobile Crane 002",
+    "asset_tag": "HYD-CRN-002",
+    "equipment_type": "mobile crane",
+    "line": "Heavy Lift Fleet",
+    "location": "Assembly Yard / Lift Zone B",
+    "status": "critical",
+    "criticality": "critical",
+    "manufacturer": "Cranex",
+    "model": "MC-900H",
+    "installed_at": "2020-09-02T09:30:00Z",
+    "last_service_at": "2026-06-01T10:15:00Z",
+    "next_maintenance": {
+      "starts_at": "2026-07-02T07:00:00Z",
+      "ends_at": "2026-07-02T17:00:00Z",
+      "description": "Accumulator precharge verification, outrigger valve leakage test, and hydraulic load-hold check."
+    },
+    "monitored_signals": ["boom_pressure", "accumulator_pressure", "winch_flow", "oil_temperature", "voltage"]
+  },
+  {
+    "id": "HYD-PMP-003",
+    "name": "Concrete Pump 003",
+    "asset_tag": "HYD-PMP-003",
+    "equipment_type": "concrete pump",
+    "line": "Pouring Fleet",
+    "location": "South Batch Plant",
+    "status": "warning",
+    "criticality": "high",
+    "manufacturer": "PutzTech",
+    "model": "CP-72H",
+    "installed_at": "2022-01-12T07:45:00Z",
+    "last_service_at": "2026-06-12T11:45:00Z",
+    "next_maintenance": {
+      "starts_at": "2026-07-08T06:30:00Z",
+      "ends_at": "2026-07-08T12:30:00Z",
+      "description": "S-tube actuation inspection, pump wear plate check, and hydraulic cooler cleaning."
+    },
+    "monitored_signals": ["delivery_pressure", "pump_flow", "oil_temperature", "motor_current", "cycle_rate"]
+  },
+  {
+    "id": "HYD-PRS-004",
+    "name": "Hydraulic Press 004",
+    "asset_tag": "HYD-PRS-004",
+    "equipment_type": "hydraulic press",
+    "line": "Forming Line A",
+    "location": "Plant 4 / Bay 2",
+    "status": "healthy",
+    "criticality": "high",
+    "manufacturer": "Apex Hydraulics",
+    "model": "HXP-900",
+    "installed_at": "2019-04-25T08:00:00Z",
+    "last_service_at": "2026-06-18T09:10:00Z",
+    "next_maintenance": {
+      "starts_at": "2026-07-12T06:00:00Z",
+      "ends_at": "2026-07-12T13:00:00Z",
+      "description": "Ram alignment inspection, pressure transducer calibration, and manifold torque check."
+    },
+    "monitored_signals": ["press_pressure", "ram_position", "oil_temperature", "cycle_time", "vibration"]
+  },
+  {
+    "id": "HYD-RIG-005",
+    "name": "Hydraulic Test Rig 005",
+    "asset_tag": "HYD-RIG-005",
+    "equipment_type": "hydraulic test rig",
+    "line": "Reliability Lab",
+    "location": "Test Cell 2",
+    "status": "offline",
+    "criticality": "medium",
+    "manufacturer": "HydroLab Systems",
+    "model": "TR-250",
+    "installed_at": "2023-05-15T08:30:00Z",
+    "last_service_at": "2026-06-20T15:00:00Z",
+    "next_maintenance": {
+      "starts_at": "2026-07-01T08:00:00Z",
+      "ends_at": "2026-07-01T11:00:00Z",
+      "description": "Sensor harness inspection and test-stand safety interlock validation."
+    },
+    "monitored_signals": ["supply_pressure", "return_pressure", "flow_rate", "oil_temperature", "voltage"]
+  }
+]
