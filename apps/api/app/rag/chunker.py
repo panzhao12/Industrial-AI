@@ -24,4 +24,5 @@ class DocumentChunker(Protocol):
 
 class PlaceholderDocumentChunker:
     def chunk(self, inputs: Sequence[ChunkingInput]) -> list[DocumentChunk]:
+        # TODO: Manually implement deterministic document chunking for the real RAG pipeline.
         raise NotImplementedError("Manual RAG chunking is not implemented yet.")

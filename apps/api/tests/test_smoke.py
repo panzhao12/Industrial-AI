@@ -58,6 +58,50 @@ def test_documents_are_synthetic_manuals(client: TestClient) -> None:
     assert payload[0]["sections"]
 
 
+def test_document_detail_and_chunks(client: TestClient) -> None:
+    detail_response = client.get("/documents/MAN-EXC-420H")
+    assert detail_response.status_code == 200
+    assert detail_response.json()["id"] == "MAN-EXC-420H"
+
+    chunks_response = client.get("/documents/MAN-EXC-420H/chunks")
+    assert chunks_response.status_code == 200
+    chunks = chunks_response.json()
+    assert len(chunks) > 0
+    assert chunks[0]["is_placeholder"] is True
+    assert chunks[0]["embedding"] is None
+
+
+def test_ingest_document_placeholder(client: TestClient) -> None:
+    response = client.post(
+        "/documents/ingest",
+        json={
+            "name": "Placeholder pump bulletin",
+            "kind": "manual",
+            "machine_id": "HYD-PMP-003",
+            "source_uri": "file://synthetic/pump-bulletin.md",
+        },
+    )
+    assert response.status_code == 202
+
+    payload = response.json()
+    assert payload["status"] == "accepted"
+    assert payload["documents_processed"] == 0
+    assert payload["chunks_created"] == 0
+
+
+def test_rag_search_placeholder(client: TestClient) -> None:
+    response = client.post(
+        "/rag/search",
+        json={"query": "pressure oscillation under load", "top_k": 5},
+    )
+    assert response.status_code == 200
+
+    payload = response.json()
+    assert payload["is_placeholder"] is True
+    assert payload["results"]
+    assert payload["results"][0]["is_placeholder"] is True
+
+
 def test_analyze_incident_placeholder(client: TestClient) -> None:
     response = client.post(
         "/incidents/RC-001/analyze",

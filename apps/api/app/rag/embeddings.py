@@ -23,4 +23,5 @@ class EmbeddingProvider(Protocol):
 
 class PlaceholderEmbeddingProvider:
     async def embed(self, inputs: Sequence[EmbeddingInput]) -> list[EmbeddingVector]:
+        # TODO: Manually wire a selected embedding provider after the RAG design is approved.
         raise NotImplementedError("Manual embedding provider integration is not implemented yet.")

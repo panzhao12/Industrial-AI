@@ -26,4 +26,5 @@ class RagRetriever(Protocol):
 
 class PlaceholderRagRetriever:
     async def retrieve(self, query: RetrievalQuery) -> list[RetrievedChunk]:
+        # TODO: Manually compose vector, lexical, and metadata retrieval later.
         raise NotImplementedError("Manual RAG retrieval is not implemented yet.")

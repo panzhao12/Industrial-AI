@@ -3,6 +3,7 @@ import type {
   AgentTrace,
   CurrentTelemetry,
   DiagnosisResult,
+  DocumentChunk,
   DocumentSummary,
   EvaluationCase,
   IncidentDetail,
@@ -11,6 +12,8 @@ import type {
   IngestDocumentResponse,
   MachineDetail,
   MachineSummary,
+  RagSearchRequest,
+  RagSearchResponse,
 } from '../types/domain';
 
 const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:8000').replace(/\/$/, '');
@@ -46,8 +49,17 @@ export const api = {
       body: JSON.stringify(payload),
     }),
   listDocuments: () => request<DocumentSummary[]>('/documents'),
+  getDocument: (documentId: string) =>
+    request<DocumentSummary>(`/documents/${encodeURIComponent(documentId)}`),
+  listDocumentChunks: (documentId: string) =>
+    request<DocumentChunk[]>(`/documents/${encodeURIComponent(documentId)}/chunks`),
   ingestDocument: (payload: IngestDocumentRequest) =>
     request<IngestDocumentResponse>('/documents/ingest', {
+      method: 'POST',
+      body: JSON.stringify(payload),
+    }),
+  searchRag: (payload: RagSearchRequest) =>
+    request<RagSearchResponse>('/rag/search', {
       method: 'POST',
       body: JSON.stringify(payload),
     }),

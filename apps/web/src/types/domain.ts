@@ -116,8 +116,14 @@ export interface DiagnosisResult {
 
 export interface DocumentSummary {
   id: string;
+  title: string | null;
   name: string;
   kind: DocumentKind;
+  source_type: string | null;
+  file_path: string | null;
+  domain: string | null;
+  machine_type: string | null;
+  created_at: string | null;
   machine_id: string | null;
   uploaded_at: string;
   status: string;
@@ -130,12 +136,29 @@ export interface IngestDocumentRequest {
   kind: DocumentKind;
   machine_id?: string | null;
   source_uri?: string | null;
+  domain?: string | null;
+  machine_type?: string | null;
 }
 
 export interface IngestDocumentResponse {
+  run_id: string;
   status: string;
   document_name: string;
+  documents_processed: number;
+  chunks_created: number;
   message: string;
+}
+
+export interface DocumentChunk {
+  id: string;
+  document_id: string;
+  chunk_index: number;
+  content: string;
+  section_title: string | null;
+  metadata: Record<string, string>;
+  embedding: number[] | null;
+  created_at: string;
+  is_placeholder: boolean;
 }
 
 export interface AgentTraceStep {
@@ -164,4 +187,29 @@ export interface EvaluationCase {
   expected_root_causes: string[];
   expected_safety_notes: string[];
   should_require_human_confirmation: boolean;
+}
+
+export interface RagSearchRequest {
+  query: string;
+  top_k: number;
+}
+
+export interface RagSearchResult {
+  document_id: string;
+  document_title: string;
+  chunk_id: string;
+  chunk_index: number;
+  section_title: string | null;
+  content: string;
+  score: number;
+  metadata: Record<string, string>;
+  is_placeholder: boolean;
+}
+
+export interface RagSearchResponse {
+  query: string;
+  top_k: number;
+  results: RagSearchResult[];
+  message: string;
+  is_placeholder: boolean;
 }

@@ -226,6 +226,18 @@ h2 {
   border-color: #e1e8ec;
 }
 
+.document-button {
+  width: 100%;
+  color: inherit;
+  cursor: pointer;
+  text-align: left;
+}
+
+.document-button.selected {
+  border-color: #1f6f8b;
+  background: #eef8fb;
+}
+
 .list-row strong,
 .list-row small {
   display: block;
@@ -337,6 +349,18 @@ dd {
   flex-wrap: wrap;
   gap: 8px;
   margin-top: 18px;
+}
+
+.document-workspace {
+  margin-top: 18px;
+}
+
+.chunk-list {
+  margin-top: 14px;
+}
+
+.chunk-row {
+  align-items: flex-start;
 }
 
 .signal-chip {
