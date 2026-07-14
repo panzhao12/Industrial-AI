@@ -89,7 +89,19 @@ def test_ingest_document_placeholder(client: TestClient) -> None:
     assert payload["chunks_created"] == 0
 
 
-def test_rag_search_placeholder(client: TestClient) -> None:
+def test_rag_ingest_and_search(client: TestClient) -> None:
+    clear_response = client.post("/rag/clear")
+    assert clear_response.status_code == 200
+    assert clear_response.json()["stored_records"] == 0
+
+    ingest_response = client.post("/rag/ingest-local-manuals")
+    assert ingest_response.status_code == 200
+
+    ingest_payload = ingest_response.json()
+    assert ingest_payload["documents"] >= 1
+    assert ingest_payload["chunks"] >= 1
+    assert ingest_payload["stored_records"] == ingest_payload["embedded_chunks"]
+
     response = client.post(
         "/rag/search",
         json={"query": "pressure oscillation under load", "top_k": 5},
@@ -97,9 +109,10 @@ def test_rag_search_placeholder(client: TestClient) -> None:
     assert response.status_code == 200
 
     payload = response.json()
-    assert payload["is_placeholder"] is True
+    assert payload["is_placeholder"] is False
     assert payload["results"]
-    assert payload["results"][0]["is_placeholder"] is True
+    assert payload["results"][0]["is_placeholder"] is False
+    assert "score" in payload["results"][0]
 
 
 def test_analyze_incident_placeholder(client: TestClient) -> None:

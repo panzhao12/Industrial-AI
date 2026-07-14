@@ -9,7 +9,7 @@ def create_app() -> FastAPI:
     app = FastAPI(
         title=settings.app_name,
         version=settings.app_version,
-        description="Non-AI skeleton API for industrial troubleshooting workflows.",
+        description="API for industrial troubleshooting workflows.",
     )
 
     app.add_middleware(

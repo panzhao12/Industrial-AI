@@ -1,4 +1,10 @@
+from pathlib import Path
+
 from pydantic_settings import BaseSettings, SettingsConfigDict
+
+
+API_ROOT = Path(__file__).resolve().parents[2]
+ENV_FILE = API_ROOT / ".env"
 
 
 class Settings(BaseSettings):
@@ -9,7 +15,11 @@ class Settings(BaseSettings):
     )
     cors_origins: list[str] = ["http://localhost:5173"]
 
-    model_config = SettingsConfigDict(env_file=".env", extra="ignore")
+    rag_embedding_provider: str = "fake"
+    local_embedding_model: str = "intfloat/multilingual-e5-small"
+    local_embedding_batch_size: int = 32
+
+    model_config = SettingsConfigDict(env_file=ENV_FILE, extra="ignore")
 
 
 settings = Settings()

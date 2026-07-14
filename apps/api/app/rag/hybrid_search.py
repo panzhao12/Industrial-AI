@@ -1,6 +1,6 @@
 from typing import Protocol
 
-from app.rag.retriever import RetrievedChunk, RetrievalQuery
+from app.rag.schemas import RetrievedChunk, RetrievalQuery
 
 
 class HybridSearch(Protocol):
