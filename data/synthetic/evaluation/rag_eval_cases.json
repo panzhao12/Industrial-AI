@@ -1,0 +1,59 @@
+[
+    {
+        "id": "pressure_symptom_exact",
+        "query": "pressure oscillation under load",
+        "top_k": 5,
+        "min_score": 0.8,
+        "expected_chunk_ids": [
+            "pressure-instability-troubleshooting_chunk_0"
+        ],
+        "expected_document_ids": [
+            "pressure-instability-troubleshooting"
+        ],
+        "should_return_results": true
+    },
+    {
+        "id": "hydraulic_instability_semantic",
+        "query": "hydraulic pressure instability during machine operation",
+        "top_k": 5,
+        "min_score": 0.8,
+        "expected_chunk_ids": [
+            "pressure-instability-troubleshooting_chunk_0"
+        ],
+        "expected_document_ids": [
+            "pressure-instability-troubleshooting"
+        ],
+        "should_return_results": true
+    },
+    {
+        "id": "pump_wear_cause",
+        "query": "pump wear causing pressure instability",
+        "top_k": 5,
+        "min_score": 0.8,
+        "expected_chunk_ids": [
+            "pressure-instability-troubleshooting_chunk_1"
+        ],
+        "expected_document_ids": [
+            "pressure-instability-troubleshooting"
+        ],
+        "should_return_results": true
+    },
+    {
+        "id": "irrelevant_grocery_chinese",
+        "query": "买菜",
+        "top_k": 5,
+        "min_score": 0.8,
+        "expected_chunk_ids": [],
+        "expected_document_ids": [],
+        "should_return_results": false
+    },
+    {
+        "id": "irrelevant_frontend",
+        "query": "Vue Pinia route configuration",
+        "top_k": 5,
+        "min_score": 0.8,
+        "expected_chunk_ids": [],
+        "expected_document_ids": [],
+        "should_return_results": false
+    }
+]

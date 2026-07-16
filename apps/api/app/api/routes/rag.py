@@ -5,6 +5,7 @@ from pathlib import Path
 from fastapi import APIRouter, HTTPException
 
 from app.rag.runtime import clear_rag_index, get_rag_status, ingest_local_manuals, search
+from app.rag.evaluation import RagEvalSummary, evaluate_rag_cases, load_eval_cases
 from app.rag.schemas import RetrievalQuery
 from app.schemas.rag import RagSearchRequest, RagSearchResponse, RagSearchResult
 
@@ -13,6 +14,9 @@ router = APIRouter()
 
 def _manuals_path() -> Path:
     return Path(__file__).resolve().parents[5] / "data" / "synthetic" / "manuals"
+
+def _evaluation_cases_path() -> Path:
+    return Path(__file__).resolve().parents[5] / "data" / "synthetic" / "evaluation" / "rag_eval_cases.json"
 
 
 @router.get("/status")
@@ -85,3 +89,21 @@ async def rag_search(payload: RagSearchRequest) -> RagSearchResponse:
         ),
         is_placeholder=False,
     )
+
+@router.post("/evaluate", response_model=RagEvalSummary)
+async def rag_evaluate() -> RagEvalSummary:
+    status = get_rag_status()
+
+    if int(status["stored_records"]) == 0:
+        raise HTTPException(
+            status_code=400,
+            detail="RAG index is empty. Call POST /rag/ingest-local-manuals first.",
+        )
+
+    eval_path = _evaluation_cases_path()
+
+    try:
+        cases = load_eval_cases(eval_path)
+        return await evaluate_rag_cases(cases, search)
+    except Exception as error:
+        raise HTTPException(status_code=500, detail=str(error)) from error
