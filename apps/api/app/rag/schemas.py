@@ -14,7 +14,7 @@ class DocumentLoadRequest(BaseModel):
     """
 
     source_uri: str
-    source_type: Literal["markdown"] = "markdown"
+    source_type: Literal["markdown", "json_record"] = "markdown"
     metadata: dict[str, Any] = Field(default_factory=dict)
 
 
@@ -30,7 +30,7 @@ class LoadedDocument(BaseModel):
     id: str
     title: str
     source_path: str
-    source_type: Literal["markdown"] = "markdown"
+    source_type: Literal["markdown", "json_record"] = "markdown"
     content: str
     metadata: dict[str, Any] = Field(default_factory=dict)
 

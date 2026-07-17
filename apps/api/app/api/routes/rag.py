@@ -4,7 +4,7 @@ from pathlib import Path
 
 from fastapi import APIRouter, HTTPException
 
-from app.rag.runtime import clear_rag_index, get_rag_status, ingest_local_manuals, search
+from app.rag.runtime import clear_rag_index, get_rag_status, ingest_local_manuals, ingest_local_knowledge_base, search
 from app.rag.evaluation import RagEvalSummary, evaluate_rag_cases, load_eval_cases
 from app.rag.schemas import RetrievalQuery
 from app.schemas.rag import RagSearchRequest, RagSearchResponse, RagSearchResult
@@ -14,6 +14,9 @@ router = APIRouter()
 
 def _manuals_path() -> Path:
     return Path(__file__).resolve().parents[5] / "data" / "synthetic" / "manuals"
+
+def _data_root_path() -> Path:
+    return Path(__file__).resolve().parents[5] / "data"
 
 def _evaluation_cases_path() -> Path:
     return Path(__file__).resolve().parents[5] / "data" / "synthetic" / "evaluation" / "rag_eval_cases.json"
@@ -105,5 +108,20 @@ async def rag_evaluate() -> RagEvalSummary:
     try:
         cases = load_eval_cases(eval_path)
         return await evaluate_rag_cases(cases, search)
+    except Exception as error:
+        raise HTTPException(status_code=500, detail=str(error)) from error
+
+@router.post("/ingest-local-knowledge-base")
+async def rag_ingest_local_knowledge_base() -> dict[str, int]:
+    data_root = _data_root_path()
+
+    if not data_root.exists():
+        raise HTTPException(
+            status_code=404,
+            detail=f"Data folder not found: {data_root}",
+        )
+
+    try:
+        return await ingest_local_knowledge_base(data_root)
     except Exception as error:
         raise HTTPException(status_code=500, detail=str(error)) from error

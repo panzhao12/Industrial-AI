@@ -9,6 +9,7 @@ from app.rag.embeddings import create_embedding_provider, embed_chunks
 from app.rag.retriever import VectorRagRetriever
 from app.rag.schemas import RetrievalQuery, RetrievalResult
 from app.rag.vector_store import InMemoryVectorStore
+from app.rag.json_knowledge_loader import load_json_knowledge_documents
 
 
 embedding_provider = create_embedding_provider(
@@ -25,24 +26,21 @@ retriever = VectorRagRetriever(
 
 async def ingest_local_manuals(manuals_path: Path) -> dict[str, int]:
     documents = await load_markdown_folder(str(manuals_path))
+    return await index_loaded_documents(documents)
 
-    chunker = MarkdownChunker()
-    all_chunks = []
+async def ingest_local_knowledge_base(data_root: Path) -> dict[str, int]:
+    markdown_documents = await load_markdown_folder(
+        str(data_root / "synthetic" / "manuals")
+    )
 
-    for document in documents:
-        chunking_result = chunker.chunk(document)
-        all_chunks.extend(chunking_result.chunks)
+    json_documents = await load_json_knowledge_documents(data_root)
 
-    embedded_chunks = await embed_chunks(all_chunks, embedding_provider)
+    documents = [
+        *markdown_documents,
+        *json_documents,
+    ]
 
-    await retriever.index_chunks(embedded_chunks)
-
-    return {
-        "documents": len(documents),
-        "chunks": len(all_chunks),
-        "embedded_chunks": len(embedded_chunks),
-        "stored_records": vector_store.count(),
-    }
+    return await index_loaded_documents(documents)
 
 
 async def search(query: RetrievalQuery) -> RetrievalResult:
@@ -61,5 +59,25 @@ def get_rag_status() -> dict[str, int | str]:
 def clear_rag_index() -> dict[str, int]:
     vector_store.clear()
     return {
+        "stored_records": vector_store.count(),
+    }
+
+async def index_loaded_documents(documents: list) -> dict[str, int]:
+    chunker = MarkdownChunker()
+
+    all_chunks = []
+
+    for document in documents:
+        chunking_result = chunker.chunk(document)
+        all_chunks.extend(chunking_result.chunks)
+
+    embedded_chunks = await embed_chunks(all_chunks, embedding_provider)
+
+    await retriever.index_chunks(embedded_chunks)
+
+    return {
+        "documents": len(documents),
+        "chunks": len(all_chunks),
+        "embedded_chunks": len(embedded_chunks),
         "stored_records": vector_store.count(),
     }
