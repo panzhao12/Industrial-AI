@@ -7,10 +7,10 @@ from pydantic import BaseModel, Field
 
 class DocumentLoadRequest(BaseModel):
     """
-    Input for loading a source document.
+    Input for a source-specific document loader.
 
-    For the MVP we only support local markdown files.
-    Later this can be extended to PDFs, object storage, uploaded files, etc.
+    The file loader currently accepts local Markdown. Synthetic JSON adapters
+    create LoadedDocument objects directly.
     """
 
     source_uri: str
@@ -39,7 +39,7 @@ class DocumentChunk(BaseModel):
     """
     A smaller text unit created from a document.
 
-    Chunks are what we embed and store in pgvector.
+    Chunks are embedded and stored through the configured vector-store boundary.
     """
 
     id: str

@@ -1,7 +1,7 @@
 [project]
 name = "industrial-ai-api"
 version = "0.1.0"
-description = "FastAPI backend for an Industrial AI Troubleshooting Copilot skeleton."
+description = "FastAPI backend with a local RAG MVP for an Industrial AI Troubleshooting Copilot."
 requires-python = ">=3.11"
 dependencies = [
     "fastapi>=0.111,<1.0",

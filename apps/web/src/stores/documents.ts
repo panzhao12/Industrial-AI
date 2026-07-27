@@ -76,7 +76,7 @@ export const useDocumentStore = defineStore('documents', {
       try {
         this.searchResponse = await api.searchRag({ query, top_k: topK });
       } catch (error) {
-        this.error = error instanceof Error ? error.message : 'Unable to run placeholder RAG search.';
+        this.error = error instanceof Error ? error.message : 'Unable to run RAG search.';
       } finally {
         this.searching = false;
       }

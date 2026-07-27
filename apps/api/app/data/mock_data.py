@@ -68,7 +68,8 @@ def list_document_chunks(document_id: str) -> list[DocumentChunk]:
             section_title=section,
             content=(
                 f"Placeholder chunk preview for {section}. "
-                "Manual parsing, chunking, embeddings, and vector storage are not implemented yet."
+                "The general document API has not parsed or indexed this record. "
+                "Local RAG ingestion is available through the /rag endpoints."
             ),
             metadata={
                 "source": "synthetic_manual_metadata",

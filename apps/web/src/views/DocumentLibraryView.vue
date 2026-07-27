@@ -208,7 +208,7 @@ function formatDate(value: string): string {
           </span>
         </article>
       </div>
-      <p v-else class="muted">Run a placeholder search to preview result layout.</p>
+      <p v-else class="muted">Populate the local RAG index through the API, then run a search.</p>
     </div>
   </section>
 </template>

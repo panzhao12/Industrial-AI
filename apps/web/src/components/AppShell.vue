@@ -28,7 +28,7 @@ const links = [
 
       <div class="system-strip">
         <span class="status-dot"></span>
-        API skeleton
+        Local RAG MVP
       </div>
     </aside>
 

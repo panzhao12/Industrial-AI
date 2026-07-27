@@ -35,7 +35,7 @@ function formatDate(value: string): string {
       <p class="eyebrow">Plant 4 operations</p>
       <h1>Diagnostic Command Center</h1>
     </div>
-    <span class="pill">Non-AI skeleton</span>
+    <span class="pill">Local RAG MVP</span>
   </section>
 
   <section class="metric-grid" aria-label="Operations summary">

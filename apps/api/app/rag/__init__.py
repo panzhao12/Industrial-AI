@@ -1,6 +1,7 @@
-"""Reserved RAG package.
+"""Local RAG runtime and extension boundaries.
 
-Manual implementation only. The skeleton may define typed placeholders here,
-but real chunking, embedding, retrieval, and search logic should be added only
-when explicitly requested.
+This package implements local document loading, chunking, configurable
+embeddings, in-memory vector search, retrieval, and evaluation. Persistent
+pgvector storage, hybrid search, reranking, and diagnosis integration remain
+future work.
 """

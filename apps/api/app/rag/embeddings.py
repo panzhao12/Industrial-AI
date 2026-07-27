@@ -24,7 +24,7 @@ class EmbeddingVector(BaseModel):
 
 class EmbeddingProvider(Protocol):
     async def embed(self, inputs: Sequence[EmbeddingInput]) -> list[EmbeddingVector]:
-        """Create embeddings for future document chunks or queries."""
+        """Create embeddings for document chunks or queries."""
 
 
 class FakeEmbeddingProvider:

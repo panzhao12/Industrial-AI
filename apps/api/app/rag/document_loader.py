@@ -8,7 +8,7 @@ from app.rag.schemas import DocumentLoadRequest, LoadedDocument
 
 class DocumentLoader(Protocol):
     async def load(self, request: DocumentLoadRequest) -> LoadedDocument:
-        """Load one source document for future ingestion."""
+        """Load one source document for ingestion."""
 
 
 class MarkdownFileDocumentLoader:

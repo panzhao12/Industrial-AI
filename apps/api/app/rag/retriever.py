@@ -15,7 +15,7 @@ from app.rag.vector_store import (
 
 class RagRetriever(Protocol):
     async def index_chunks(self, chunks: Sequence[EmbeddedChunk]) -> None:
-        """Index embedded chunks for future retrieval."""
+        """Index embedded chunks for retrieval."""
 
     async def retrieve(self, query: RetrievalQuery) -> RetrievalResult:
         """Retrieve relevant chunks for a query."""

@@ -1,17 +1,23 @@
 # Agent Contracts
 
-This project intentionally does not implement AI logic yet. The current backend exposes typed boundaries so future RAG, LangGraph, tool calling, and human-in-the-loop diagnosis can be added without rewriting the HTTP API.
+This project contains an implemented local RAG MVP, but it intentionally does not implement an AI diagnosis workflow yet. The backend exposes typed boundaries so future LangGraph orchestration, tool calling, persistent retrieval, and human-in-the-loop diagnosis can be added without rewriting the HTTP API.
 
-## Reserved Manual Implementation Areas
+## Implementation Boundaries
 
-The following folders are reserved for future manual implementation and must not be modified unless explicitly requested:
+`apps/api/app/rag/` contains intentional, active local-development implementations:
 
-- `apps/api/app/rag/`
-- `apps/api/app/agent/`
+- Markdown and synthetic JSON document loading
+- Markdown-aware chunking
+- Deterministic fake embeddings
+- Optional local sentence-transformer embeddings
+- In-memory vector storage and cosine search
+- Vector retrieval and RAG evaluation
 
-Codex may create typed interfaces, placeholder classes, and TODO comments in these folders. Codex must not implement real AI, RAG, LangGraph, OpenAI, Claude, Anthropic, embedding, retrieval, prompt orchestration, or tool-calling logic there unless the user explicitly asks for that implementation.
+Do not describe this RAG path as PostgreSQL-backed, durable, hybrid, reranked, or integrated with diagnosis. Those capabilities are not implemented.
 
-The current placeholders should remain boring and safe: raise `NotImplementedError`, return disabled results, or expose empty typed contracts. Mock data belongs in `apps/api/app/data/mock_data.py`, not in the reserved implementation packages.
+`apps/api/app/agent/` remains reserved for future manual implementation. Do not implement LangGraph, LLM diagnosis, prompt orchestration, model-provider calls, or external tool execution there unless the user explicitly requests it.
+
+Do not add OpenAI, Anthropic, Claude, or other hosted model-provider integrations anywhere in the project unless the user explicitly requests them. Placeholder agent components should remain boring and safe: raise `NotImplementedError`, return disabled results, or expose typed contracts. Mock diagnosis and trace data belongs in `apps/api/app/data/mock_data.py`.
 
 ## RAG Retriever
 
@@ -25,7 +31,10 @@ Purpose:
 
 Current behavior:
 
-- `PlaceholderRagRetriever` raises `NotImplementedError`.
+- `VectorRagRetriever` indexes embedded chunks through the configured vector-store boundary.
+- It embeds queries, runs vector search, and returns scored `RetrievedChunk` results.
+- The application runtime uses `VectorRagRetriever`.
+- `PlaceholderRagRetriever` remains as an unused future/disabled implementation and raises `NotImplementedError`.
 
 ## Embedding Service
 
@@ -38,25 +47,53 @@ Purpose:
 
 Current behavior:
 
-- `PlaceholderEmbeddingProvider` raises `NotImplementedError`.
+- `FakeEmbeddingProvider` is the default. It produces deterministic 1,536-dimensional vectors for development and tests; it is not semantic.
+- `LocalSentenceTransformerEmbeddingProvider` provides optional local semantic embeddings.
+- The local provider defaults to `intfloat/multilingual-e5-small` and uses E5 query/passage prefixes.
+- `create_embedding_provider` supports `fake` and `local`.
+- The local provider requires `sentence-transformers`, which is not part of the base project dependencies.
 
-## Chunking and Hybrid Search
+## Loading, Chunking, and Vector Search
 
 Locations:
 
 - `apps/api/app/rag/document_loader.py`
+- `apps/api/app/rag/json_knowledge_loader.py`
 - `apps/api/app/rag/chunker.py`
 - `apps/api/app/rag/vector_store.py`
 - `apps/api/app/rag/hybrid_search.py`
 
 Purpose:
 
-- Prepare future document chunking and combined lexical/vector search.
-- Keep future pgvector and keyword-search details out of HTTP route handlers.
+- Normalize supported knowledge sources into loaded documents.
+- Split documents into retrieval-sized chunks.
+- Keep vector-store and future hybrid-search details out of HTTP route handlers.
 
 Current behavior:
 
-- Placeholders raise `NotImplementedError`.
+- `MarkdownFileDocumentLoader` loads local Markdown files.
+- `json_knowledge_loader.py` converts machines, telemetry, error codes, manual metadata, and repair cases into `LoadedDocument` objects.
+- `MarkdownChunker` splits content by headings and character limits.
+- `InMemoryVectorStore` stores records for the life of the API process and performs cosine-similarity search.
+- `PlaceholderVectorStore` still raises `NotImplementedError` for future persistent storage.
+- `PlaceholderHybridSearch` still raises `NotImplementedError`; lexical and hybrid retrieval are not implemented.
+
+## RAG Runtime and Evaluation
+
+Locations:
+
+- `apps/api/app/rag/runtime.py`
+- `apps/api/app/rag/evaluation.py`
+- `apps/api/app/api/routes/rag.py`
+
+Current behavior:
+
+- The runtime wires the configured embedding provider to `InMemoryVectorStore` and `VectorRagRetriever`.
+- Local ingestion can load Markdown manuals only or the broader synthetic knowledge base.
+- `POST /rag/search` returns real retrieval results with `is_placeholder=false`.
+- `POST /rag/evaluate` scores the populated index against five static RAG cases.
+- The runtime is process-local and loses all indexed records when the API restarts.
+- It does not write to PostgreSQL/pgvector.
 
 ## Diagnosis Agent
 
@@ -101,16 +138,22 @@ Current behavior:
 
 ## Evaluation
 
-Location: `apps/api/app/agent/evaluation.py`
+Locations:
+
+- `apps/api/app/rag/evaluation.py`
+- `apps/api/app/agent/evaluation.py`
 
 Purpose:
 
-- Define the future boundary for diagnosis evaluation cases and scoring.
+- Evaluate current retrieval behavior separately from future diagnosis quality.
 
 Current behavior:
 
+- `RagEvalCase` and `evaluate_rag_cases` implement retrieval evaluation.
+- `POST /rag/evaluate` uses `data/synthetic/evaluation/rag_eval_cases.json`.
 - `EvaluationCase` is a stable schema.
 - `PlaceholderDiagnosisEvaluator` raises a placeholder exception.
+- `GET /evaluation/cases` returns diagnosis fixtures but does not score model behavior.
 
 ## Human-In-The-Loop Future State
 
